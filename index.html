@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITカテゴリー - 記事一覧</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: row-reverse; /* サイドバーを右に固定 */
+        }
+
+        /* サイドバー */
+        #sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        #sidebar h2 {
+            color: white;
+            text-align: center;
+        }
+
+        /* カテゴリーボタン */
+        .category-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* メインコンテンツ */
+        #main-content {
+            margin-right: 270px; /* サイドバー分のスペース */
+            padding: 20px;
+            flex-grow: 1;
+            background-color: white;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 記事リスト */
+        #article-list {
+            margin-top: 20px;
+        }
+
+        .article-item {
+            padding: 15px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .read-more-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background-color: #218838;
+        }
+
+        /* 管理者情報 */
+        #admin-info {
+            margin-top: 20px;
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        #admin-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        #admin-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* カテゴリータイトル */
+        .category-title {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- サイドバー -->
+    <div id="sidebar">
+        <h2>カテゴリー</h2>
+        <button class="category-btn" onclick="filterDatabases('IT')">IT</button>
+        <button class="category-btn" onclick="filterDatabases('医療')">医療</button>
+        <button class="category-btn" onclick="filterDatabases('金融')">金融</button>
+        <button class="category-btn" onclick="filterDatabases('歴史')">歴史</button>
+        <button class="category-btn" onclick="filterDatabases('科学')">科学</button>
+        <button class="category-btn" onclick="filterDatabases('教育')">教育</button>
+
+        <!-- 管理者情報 -->
+        <div id="admin-info">
+            <h3>管理者情報</h3>
+            <p><strong>名前:</strong> 山田 太郎</p>
+            <p><strong>連絡先:</strong> taro.yamada@example.com</p>
+            <p><strong>経歴:</strong> データベース管理の専門家</p>
+        </div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div id="main-content">
+        <header>
+            <h1>ITカテゴリー - 記事一覧</h1>
+        </header>
+
+        <section id="article-list">
+            <h1 class="category-title">IT関連の記事</h1> <!-- IT関連のカテゴリーを表示 -->
+
+            <!-- プログラミングカテゴリー -->
+            <h2>プログラミング</h2>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> Pythonの基本<br>
+                <strong>投稿日:</strong> 2024年10月5日<br>
+                <p>Pythonの基本的な構文と使い方を解説します。</p>
+                <button class="read-more-btn" onclick="viewArticle('programming1.html')">続きを読む</button>
+            </div>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> JavaScript入門<br>
+                <strong>投稿日:</strong> 2024年10月12日<br>
+                <p>JavaScriptの基本とウェブ開発での使用例について説明します。</p>
+                <button class="read-more-btn" onclick="viewArticle('programming2.html')">続きを読む</button>
+            </div>
+
+            <!-- IT機器カテゴリー -->
+            <h2>IT機器</h2>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> 最新のPCパーツ<br>
+                <strong>投稿日:</strong> 2024年9月20日<br>
+                <p>最新のPCパーツのトレンドについて紹介します。</p>
+                <button class="read-more-btn" onclick="viewArticle('equipment1.html')">続きを読む</button>
+            </div>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> おすすめの周辺機器<br>
+                <strong>投稿日:</strong> 2024年9月28日<br>
+                <p>作業効率を上げるための周辺機器を紹介します。</p>
+                <button class="read-more-btn" onclick="viewArticle('equipment2.html')">続きを読む</button>
+            </div>
+
+            <!-- インターネットカテゴリー -->
+            <h2>インターネット</h2>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> ネットセキュリティの基礎<br>
+                <strong>投稿日:</strong> 2024年8月5日<br>
+                <p>ネットセキュリティを理解するための基本を学びます。</p>
+                <button class="read-more-btn" onclick="viewArticle('internet1.html')">続きを読む</button>
+            </div>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> SNSの活用方法<br>
+                <strong>投稿日:</strong> 2024年8月12日<br>
+                <p>SNSをビジネスで活用するための戦略を解説します。</p>
+                <button class="read-more-btn" onclick="viewArticle('internet2.html')">続きを読む</button>
+            </div>
+            <h2>最新技術</h2>
+            <div class="article-item">
+                <strong>記事タイトル:</strong> 次世代技術の進化<br>
+                <strong>投稿日:</strong> 2024年10月18日<br>
+                <p>Iと機械学習は、自然言語処理や画像認識などの分野で進化を続け、企業はこれらの技術を活用して業務の自動化や効率化を図ります。また、AIが生成するコンテンツやデータ分析の精度向上も進むでしょう。</p>
+                <button class="read-more-btn" onclick="viewArticle('internet1.html')">続きを読む</button>
+            </div>
+
+        </section>
+    </div>
+
+    <script>
+        // カテゴリーのフィルター機能（ダミー関数）
+        function filterDatabases(category) {
+            alert("フィルター機能は実装されていません。");
+        }
+
+        // 記事を表示する関数
+        function viewArticle(article) {
+            // 遷移先URLへリダイレクト
+            window.location.href = article;
+        }
+    </script>
+
+</body>
+</html>
